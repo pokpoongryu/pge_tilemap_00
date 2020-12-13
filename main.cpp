@@ -3,35 +3,43 @@
 
 
 #include <iostream>
+
+#include "Tile.h"
+
+
+
 using namespace std;
 
 
-class CUnit
-{
-public:
-	void Doit()
-	{
-		cout<<"CUnit::Doit()"<<endl;
-	};
-
-};
+/*
+ * create by pokpoongryu
+ *
+ * this class is to the tile.
+*/
 
 
 class Example : public olc::PixelGameEngine
 {
+private:
+	CTile mTile;
+
+
 public:
 	Example()
 	{
 		sAppName = "pge_tilemap_00";
 
-		CUnit tUnit;
-		tUnit.Doit();
 	}
 
 public:
 	bool OnUserCreate() override
 	{
 		// Called once at the start, so create things here
+		//
+		
+		mTile.CreateRyu();
+
+
 		return true;
 	}
 
@@ -40,13 +48,25 @@ public:
 		// called once per frame
 		//
 		//
+		
+		mTile.UpdateRyu();
 	
 		Clear(olc::BLACK);		
 		
 		
 		
+		mTile.DisplayRyu();
 		
 		 
+		return true;
+	}
+
+	//bool OnUserDestroy() override 
+	bool OnUserDestroy() override
+	{
+		
+		mTile.DestroyRyu();
+
 		return true;
 	}
 };
