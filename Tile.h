@@ -17,8 +17,11 @@ public:
 	int mWidth = 0;
 	int mHeight = 0;
 
+
+	olc::PixelGameEngine *mpPGE = nullptr;
+
 public:
-	void CreateRyu();
+	void CreateRyu(int tX, int tY, int tWidth = 32, int tHeight = 32);
 	void DestroyRyu();
 	void UpdateRyu();
 	void DisplayRyu();

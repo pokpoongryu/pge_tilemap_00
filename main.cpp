@@ -10,6 +10,9 @@
 
 using namespace std;
 
+#define GRID_W 15
+#define GRID_H 15
+
 
 /*
  * create by pokpoongryu
@@ -21,8 +24,8 @@ using namespace std;
 class Example : public olc::PixelGameEngine
 {
 private:
-	CTile mTile;
-
+	//CTile mTile;
+	CTile mTile[GRID_H][GRID_W];
 
 public:
 	Example()
@@ -37,7 +40,16 @@ public:
 		// Called once at the start, so create things here
 		//
 		
-		mTile.CreateRyu();
+		for(int tRow = 0; tRow<GRID_H; tRow++)
+		{
+			for(int tCol = 0; tCol<GRID_W; tCol++)
+			{
+				mTile[tRow][tCol].CreateRyu(tCol*32, tRow*32, 32, 32);
+
+				mTile[tRow][tCol].SetPGE(this);
+			}
+		}
+		//mTile.CreateRyu();
 
 
 		return true;
@@ -49,13 +61,27 @@ public:
 		//
 		//
 		
-		mTile.UpdateRyu();
+
+		for(int tRow = 0; tRow<GRID_H; tRow++)
+		{	
+			for(int tCol = 0; tCol<GRID_W; tCol++)
+			{
+				mTile[tRow][tCol].UpdateRyu();
+			}
+		}
+
 	
 		Clear(olc::BLACK);		
+			
 		
 		
-		
-		mTile.DisplayRyu();
+		for(int tRow = 0; tRow<GRID_H; tRow++)
+		{
+			for(int tCol = 0; tCol<GRID_W; tCol++)
+			{
+				mTile[tRow][tCol].DisplayRyu();
+			}
+		}
 		
 		 
 		return true;
@@ -64,8 +90,13 @@ public:
 	//bool OnUserDestroy() override 
 	bool OnUserDestroy() override
 	{
-		
-		mTile.DestroyRyu();
+		for(int tRow = 0; tRow<GRID_H; tRow++)
+		{
+			for(int tCol = 0; tCol<GRID_W; tCol++)
+			{
+				mTile[tRow][tCol].DestroyRyu();
+			}
+		}
 
 		return true;
 	}
