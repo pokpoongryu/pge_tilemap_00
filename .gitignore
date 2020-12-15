@@ -1,3 +1,5 @@
 Makefile
 *.o
 *.exe
+pge_tilemap_00
+.vs
