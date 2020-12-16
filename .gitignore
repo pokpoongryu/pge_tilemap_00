@@ -3,3 +3,4 @@ Makefile
 *.exe
 pge_tilemap_00
 .vs
+debug.log
