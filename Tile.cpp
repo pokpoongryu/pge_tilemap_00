@@ -24,8 +24,9 @@ void CTile::UpdateRyu()
 void CTile::DisplayRyu()
 {
 	//cout<<"DisplayRyu"<<endl;
-	
-	mpPGE->DrawRect(mX, mY, mWidth, mHeight, olc::WHITE);
+
+	mpPGE->FillRect( mX, mY, mWidth, mHeight, olc::WHITE);
+	mpPGE->DrawRect(mX, mY, mWidth, mHeight, olc::BLACK);
 }
 void CTile::SetPGE(olc::PixelGameEngine *tpPGE)
 {
