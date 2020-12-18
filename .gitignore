@@ -4,3 +4,4 @@ Makefile
 pge_tilemap_00
 .vs
 debug.log
+msvc
