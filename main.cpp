@@ -4,7 +4,7 @@
 
 #include <iostream>
 
-#include "Tile.h"
+#include "Block.h"
 
 
 
@@ -43,21 +43,24 @@ private:
 		0,0,0, 0,0,0, 0,0,0,
 		1,1,0, 0,0,1, 0,0,3,
 	};
-	// {
-	// 	0,0,0, 0,0,0, 0,0,0,
-	// 	0,0,0, 0,0,0, 0,0,0,
-	// 	0,0,0, 0,0,0, 0,0,0,
-	// 	0,0,0, 0,0,0, 0,0,0,
-	// 	0,0,0, 0,0,0, 0,0,0,
-	// 	0,0,0, 0,0,0, 0,0,0,
-	// 	0,0,0, 0,0,0, 0,0,0,
-	// 	0,0,0, 0,0,0, 0,0,0,
-	// 	0,0,0, 0,0,0, 0,0,0,
-	// };
+	
+
+
+	
+
+
 
 	//화면에 보여질 그리드의 일부 영역 
-	//CTile mTile;
-	CTile mTile[GRID_H][GRID_W];
+	//CBlock mTile;
+	CBlock mBlocks[GRID_H][GRID_W];
+
+
+
+	int mCameraX = 1;
+	int mCameraY = 1;
+
+	int mDisplayStartX = 0;
+	int mDisplayStartY = 0;
 
 public:
 	Example()
@@ -77,9 +80,12 @@ public:
 		{
 			for(int tCol = 0; tCol<GRID_W; tCol++)
 			{
-				mTile[tRow][tCol].CreateRyu(tCol*32, tRow*32, 32, 32);
+				int tX = mDisplayStartX + tCol*32;
+				int tY = mDisplayStartY + tRow*32;
 
-				mTile[tRow][tCol].SetPGE(this);
+				mBlocks[tRow][tCol].CreateRyu(tX, tY, 32, 32);
+
+				mBlocks[tRow][tCol].SetPGE(this);
 			}
 		}
 		//mTile.CreateRyu();
@@ -93,13 +99,39 @@ public:
 		// called once per frame
 		//
 		//
+
+		if (GetKey(olc::Key::LEFT).bReleased)
+		{
+			mCameraX = mCameraX - 1;	
+		}
+
+		if (GetKey(olc::Key::RIGHT).bReleased)
+		{
+			mCameraX = mCameraX + 1;	
+
+			cout<<"mCameraX: "<<mCameraX<<endl;
+		}
+
+
+
+		if (GetKey(olc::Key::UP).bReleased)
+		{
+			mCameraY = mCameraY - 1;	
+		}
+
+		if (GetKey(olc::Key::DOWN).bReleased)
+		{
+			mCameraY = mCameraY + 1;	
+
+			cout<<"mCameraX: "<<mCameraX<<endl;
+		}
 		
 
 		for(int tRow = 0; tRow<GRID_H; tRow++)
 		{	
 			for(int tCol = 0; tCol<GRID_W; tCol++)
 			{
-				mTile[tRow][tCol].UpdateRyu();
+				mBlocks[tRow][tCol].UpdateRyu();
 			}
 		}
 
@@ -112,7 +144,7 @@ public:
 		{
 			for(int tCol = 0; tCol<GRID_W; tCol++)
 			{
-				mTile[tRow][tCol].DisplayRyu();
+				mBlocks[tRow][tCol].DisplayRyu(mGrid, mCameraX, mCameraY);
 			}
 		}
 		
@@ -127,7 +159,7 @@ public:
 		{
 			for(int tCol = 0; tCol<GRID_W; tCol++)
 			{
-				mTile[tRow][tCol].DestroyRyu();
+				mBlocks[tRow][tCol].DestroyRyu();
 			}
 		}
 
