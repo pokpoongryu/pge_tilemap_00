@@ -29,20 +29,15 @@ void CBlock::DisplayRyu(int tGrid[][TOTAL_GRID_W], int tX, int tY)
 	// mpPGE->DrawRect(mX, mY, mWidth, mHeight, olc::BLACK);
 
 	
-
+	//Find out the property value of an arbitrary position on the grid
 	// int tCol = mX/32;
 	// int tRow = mY/32;
 	int tCol = ( mX + tX*32 )/32;/*mY/32;/*/
 	int tRow = ( mY + tY*32 )/32;//mY/32;
 
 
-	//표시할 데이터를 결정할, 속성 데이터를 알아냄
+	//Select the data to be displayed by referring to the attribute grid
 	int tAttribute = tGrid[tRow][tCol];
-
-	//이 부분을 타일 이미지로 하면 되겠다.
-	//
-	//속성 그리드의 속성 데이터를 참고하여 
-	//화면에 표시할 데이터를 선택 
 	switch( tAttribute )
 	{
 		case 0:
